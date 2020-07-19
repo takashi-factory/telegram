@@ -6,8 +6,11 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)#ストロングパラメータ
-    @post.save # saveをしてデータベースに保存
-    redirect_to @post, notice: '投稿を保存しますた' # showページにリダイレクト
+    if @post.save # saveをしてデータベースに保存
+      redirect_to @post, notice: '投稿を保存しますた' # showページにリダイレクト
+    else
+      render :new
+    end
   end
 
   def show

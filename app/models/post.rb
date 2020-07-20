@@ -11,7 +11,9 @@ class Post < ApplicationRecord
           errors.add(:image, 'にはjpagまたはpngファイルを添付してくだちい')
       end
     else
-      errors.add(:image, 'ファイルを添付せい')
+      unless image.attached?
+        errors.add(:image, 'ファイルを添付せい')
+      end
     end
   end
 

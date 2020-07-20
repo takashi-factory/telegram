@@ -20,6 +20,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      redirect_to @post, notice: '投稿を更新したぞ.'
+    else
+      render :edit
+    end
+  end
 
   private
 

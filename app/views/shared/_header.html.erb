@@ -7,7 +7,7 @@
 
   <%# メニュー格納時のボタン %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <span class="navbar-toggler-icon "></span>
   </button>
 
   <%# メニュー %>
@@ -15,7 +15,16 @@
     <form class="nav-item form-inline mb2 mb-lg-0" >
       <input type="text" name="q" id="q" value="" class="form-control mr-sm-3" placeholder="検索">
     </form>
-    <a class="nav-item col-10" href="/"><i class="far fa-user"></i></a>
+
+    <% if user_signed_in? %>
+      <%= link_to edit_user_registration_path, class: "nav-link" do %>
+        <i class="far fa-user"></i>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "nav-item" do %>
+        <i class="far fa-user"></i>
+      <% end %>
+    <% end %>
   </div>
-  
+
 </nav>

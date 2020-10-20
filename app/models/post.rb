@@ -7,8 +7,8 @@ class Post < ApplicationRecord
     ###### 中身を確認 ######
     if image.present?
       ######## ファイルの種類をチェック ########
-      unless image.content_type.in?(%w(image/jpag image/png))
-          errors.add(:image, 'にはjpagまたはpngファイルを添付してくだちい')
+      unless image.content_type.in?(%w(image/jpdg image/png))
+          errors.add(:image, 'にはjpegまたはpngファイルを添付してくだちい')
       end
     else
       unless image.attached?

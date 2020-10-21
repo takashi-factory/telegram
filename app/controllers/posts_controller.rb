@@ -11,9 +11,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)#ストロングパラメータ
+    @post = current_user.post.new(post_params)#ストロングパラメータ
     if @post.save # saveをしてデータベースに保存
-      redirect_to @post, notice: '投稿を保存しますた' # showページにリダイレクト
+      redirect_to @post, notice: '投稿を保存しました!' # showページにリダイレクト
     else
       render :new
     end

@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [ :show, :edit, :update, :destroyn ]
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @post = Post.order(created_at: :desc)
   end
 
   def new
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.post.new(post_params)#ストロングパラメータ
+    @post = current_user.posts.new(post_params)#ストロングパラメータ
     if @post.save # saveをしてデータベースに保存
       redirect_to @post, notice: '投稿を保存しました!' # showページにリダイレクト
     else

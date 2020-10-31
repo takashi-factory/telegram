@@ -1,9 +1,9 @@
 <div class="card mb-5">
     <div class="card-header bg-transparent">
       <% if post.user.avatar.attached? %>
-        <%= image_tag post.user.avatar.variant(resize_to_fill: [32, 32]), class: 'img-fluid rounded-circle' %>
+        <%= image_tag post.user.avatar.variant(resize_to_fill: [32, 32]), class: "img-fluid rounded-circle" %>
       <% else %>
-        <%= image_tag "no_image", class: "img-fluid " %>
+        <%= image_tag "no_image", class: "img-fluid rounded-circle" %>
       <% end %>
       <%= post.user.name %>
     </div>
@@ -17,5 +17,12 @@
   <% end %>
   <div class="card-text">
     <p><%= truncate(post.caption, length: 70) %></p>
+
+    <%= form_with model: @comment, url: comments_path, local: true do |f| %>
+      <%= f.hidden_field :post_id, value: post.id %>
+      <%= f.text_field :body, class: "col-8 form-control" %>
+      <%= f.submit t(".submit"), class: "col-4" %>
+    <% end %>
+
   </div>
 </div>

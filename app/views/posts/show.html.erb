@@ -5,13 +5,13 @@
         <% if @post.image.attached? %>
           <%= image_tag @post.image.variant(resize_to_fill: [800, 800]).processed, class: "card-img" %>
         <% else %>
-          <%= image_tag "no_image", class: "card_img" %>
+          <%= image_tag "no_image", class: "card-img" %>
         <% end %>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-5">
         <div class="card-body">
           <% if @post.user.avatar.attached? %>
-            <%= image_tag @post.user.avatar.variant(resize_to_fill: [32, 32]).processed, class: 'img-fluid rounded-circle' %>
+            <%= image_tag @post.user.avatar.variant(resize_to_fill: [32, 32]).processed, class: "img-fluid rounded-circle" %>
           <% else %>
             <%= image_tag "no_image", class: "img-thumbnail rounded-circle" %>
           <% end %>
@@ -19,7 +19,23 @@
           <hr>
           <div class="scroll">
             <%= simple_format (@post.caption) %>
+
+            <% @post.comments.each do |comment| %>
+              <p>
+                <%= image_tag comment.user.avatar.variant(resize_to_fill:[32,32]), class: "img-fluid rounded-circle" %>
+                <%= comment.user.name %>
+                <%= comment.body %>
+              </p>
+            <% end %>
+
           </div>
+
+          <%= form_with model: @comment, url: comments_path, class: "card-img", local: true do |f| %>
+            <%= f.hidden_field :post_id, value: @post.id %>
+            <%= f.text_field :body, class: "col-8 form-control" %>
+            <%= f.submit t(".submit"), class: "col-4" %>
+          <% end %>
+
         </div>
       </div>
     </div>

@@ -61,7 +61,7 @@
     </p>
 
     <p>
-      <%= link_to t(".log_out"), destroy_user_session_path(resource), method: :delete, class: "btn btn-block btn-secondary" %>
+      <%= link_to t(".log_out"), destroy_user_session_path(redirect_to: :sign_up), method: :delete, class: "btn btn-block btn-secondary" %>
     </p>
   <% end %>
 
